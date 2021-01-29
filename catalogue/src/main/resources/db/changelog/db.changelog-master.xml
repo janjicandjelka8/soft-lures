@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="db.changelog-master.xml">
+
+  <property name="seq-start-value" value="10050" />
+
+  <!-- increments -->
+  <include  file="v001/model-size.xml" relativeToChangelogFile="true" />
+  <include  file="v001/model.xml" relativeToChangelogFile="true" />
+  <include  file="v001/decor.xml" relativeToChangelogFile="true" />
+  <include  file="v001/item.xml" relativeToChangelogFile="true" />
+
+
+  <!-- dev test data -->
+  <include file="dev/db.changelog.dev.data.xml" relativeToChangelogFile="true" context="dev"/>
+
+</databaseChangeLog>

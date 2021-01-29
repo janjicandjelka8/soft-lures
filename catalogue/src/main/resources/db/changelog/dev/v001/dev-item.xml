@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="dev/v001/dev-item.xml">
+
+  <!-- define a property for the change-set label, ideally a Jira issue number -->
+  <property name="label" value="DB model creation - test data"/>
+
+  <!-- set version -->
+  <changeSet id="item_simple_test_data_start_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+  <!-- ###### table decor (ITEM) ###### -->
+
+  <changeSet id="item_insert_simple_test_data" author="ajan" labels="${label}">
+    <!-- 1: mighty 3cm decor1-->
+    <insert tableName="item">
+      <column name="id" valueNumeric="1"/>
+      <column name="imageUrl" value="m-3cm-decor1"/>
+      <column name="mode_id" valueNumeric="1"/>
+      <column name="deco_id" valueNumeric="1"/>
+    </insert>
+    <!-- 2: mighty 3cm decor2-->
+    <insert tableName="item">
+      <column name="id" valueNumeric="2"/>
+      <column name="imageUrl" value="m-3cm-decor1"/>
+      <column name="mode_id" valueNumeric="1"/>
+      <column name="deco_id" valueNumeric="2"/>
+    </insert>
+    <!-- 3: mighty 3cm decor3 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="3"/>
+      <column name="imageUrl" value="m-3cm-decor3"/>
+      <column name="mode_id" valueNumeric="1"/>
+      <column name="deco_id" valueNumeric="3"/>
+    </insert>
+    <!-- 4: mighty 3cm decor4 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="4"/>
+      <column name="imageUrl" value="m-3cm-decor4"/>
+      <column name="mode_id" valueNumeric="1"/>
+      <column name="deco_id" valueNumeric="4"/>
+    </insert>
+    <!-- 5: mighty 3cm decor5 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="5"/>
+      <column name="imageUrl" value="m-3cm-decor5"/>
+      <column name="mode_id" valueNumeric="1"/>
+      <column name="deco_id" valueNumeric="5"/>
+    </insert>
+    <!-- 6: mighty 5cm decor1 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="6"/>
+      <column name="imageUrl" value="m-2cm-decor1"/>
+      <column name="mode_id" valueNumeric="2"/>
+      <column name="deco_id" valueNumeric="1"/>
+    </insert>
+    <!-- 7: mighty 5cm decor2 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="7"/>
+      <column name="imageUrl" value="m-5cm-decor2"/>
+      <column name="mode_id" valueNumeric="2"/>
+      <column name="deco_id" valueNumeric="2"/>
+    </insert>
+    <!-- 8: mighty 5cm decor3 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="8"/>
+      <column name="imageUrl" value="m-5cm-decor3"/>
+      <column name="mode_id" valueNumeric="2"/>
+      <column name="deco_id" valueNumeric="3"/>
+    </insert>
+    <!-- 9: mighty 10cm decor1 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="9"/>
+      <column name="imageUrl" value="m-10cm-decor1"/>
+      <column name="mode_id" valueNumeric="3"/>
+      <column name="deco_id" valueNumeric="1"/>
+    </insert>
+    <!-- 10: shed 7inch decor1 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="10"/>
+      <column name="imageUrl" value="s-7inch-decor1"/>
+      <column name="mode_id" valueNumeric="4"/>
+      <column name="deco_id" valueNumeric="1"/>
+    </insert>
+    <!-- 11: shed 7inch decor2 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="11"/>
+      <column name="imageUrl" value="s-7inch-decor2"/>
+      <column name="mode_id" valueNumeric="4"/>
+      <column name="deco_id" valueNumeric="2"/>
+    </insert>
+    <!-- 12: shed 7inch decor3 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="12"/>
+      <column name="imageUrl" value="s-7inch-decor3"/>
+      <column name="mode_id" valueNumeric="4"/>
+      <column name="deco_id" valueNumeric="3"/>
+    </insert>
+    <!-- 13: shed 10cm decor3 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="13"/>
+      <column name="imageUrl" value="s-10cm-decor3"/>
+      <column name="mode_id" valueNumeric="5"/>
+      <column name="deco_id" valueNumeric="3"/>
+    </insert>
+    <!-- 14: shed 10cm decor4 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="14"/>
+      <column name="imageUrl" value="s-10cm-decor4"/>
+      <column name="mode_id" valueNumeric="5"/>
+      <column name="deco_id" valueNumeric="4"/>
+    </insert>
+    <!-- 15: twist 10cm decor1 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="15"/>
+      <column name="imageUrl" value="t-10cm-decor1"/>
+      <column name="mode_id" valueNumeric="6"/>
+      <column name="deco_id" valueNumeric="1"/>
+    </insert>
+    <!-- 16: twist 10cm decor3 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="16"/>
+      <column name="imageUrl" value="t-10cm-decor3"/>
+      <column name="mode_id" valueNumeric="6"/>
+      <column name="deco_id" valueNumeric="3"/>
+    </insert>
+    <!-- 17: twist 10cm decor4 -->
+    <insert tableName="item">
+      <column name="id" valueNumeric="17"/>
+      <column name="imageUrl" value="t-10cm-decor5"/>
+      <column name="mode_id" valueNumeric="6"/>
+      <column name="deco_id" valueNumeric="5"/>
+    </insert>
+    
+  </changeSet>
+
+  <!-- set version -->
+  <changeSet id="model_simple_test_data_end_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+</databaseChangeLog>

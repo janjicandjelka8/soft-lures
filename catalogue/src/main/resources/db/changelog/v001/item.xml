@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="v001/item.xml">
+
+  <!-- define a property that can be used to set varchars to 'char' with oracle -->
+  <property name="varchar_type" value="char" dbms="oracle"/>
+  <property name="varchar_type" value=""/>
+
+  <property name="label" value="DB model creation" />
+
+  <!-- set version -->
+  <changeSet id="item_tag_database_start_version" author="ajan" labels="${label}">
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+   <!-- ###### table item (ITEM) ###### -->
+
+  <!-- sequence -->
+  <changeSet id="seq_item_id_create_sequence" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <sequenceExists sequenceName="seq_item_id"/>
+      </not>
+    </preConditions>
+    <createSequence sequenceName="seq_item_id" startValue="${seq-start-value}" incrementBy="1"/>
+  </changeSet>
+
+  <changeSet id="seq_item_grant" author="ajan" labels="${label}" dbms="oracle">
+    <preConditions onFail="MARK_RAN">
+        <sequenceExists sequenceName="seq_item_id"/>
+    </preConditions>
+    <sql>
+      GRANT SELECT ON seq_item_id TO ${app-user};
+    </sql>
+  </changeSet>
+
+  <!-- table definition/changes -->
+  <changeSet id="item_create_table" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="item"/>
+      </not>
+    </preConditions>
+    <createTable tableName="item" remarks="(ITEM) Contains all info about items.">
+      <column name="id" autoIncrement="true" type="BIGINT" remarks="Internal identifier of the item">
+        <constraints primaryKey="true" nullable="false" primaryKeyName="item_pk"/>
+      </column>
+      <column name="imageUrl" type="VARCHAR(120 ${varchar_type})" remarks="Url of item image.">
+        <constraints nullable="false" />
+      </column>
+      <column name="mode_id" type="BIGINT" remarks="Reference to the related model.">
+        <constraints nullable="false"/>
+      </column>
+      <column name="deco_id" type="BIGINT" remarks="Reference to the related decor.">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <sql>
+      GRANT SELECT, INSERT, UPDATE ON item TO ${app-user};
+    </sql>
+  </changeSet>
+  
+  <!-- foreign keys -->
+  <changeSet id="item_mode_id" author="ajan" labels="${label}">
+    <addForeignKeyConstraint
+            baseColumnNames="mode_id"
+            baseTableName="item"
+            constraintName="item_mode_fk"
+            referencedColumnNames="id"
+            referencedTableName="model"/>
+  </changeSet>
+  <changeSet id="item_deco_id" author="ajan" labels="${label}">
+    <addForeignKeyConstraint
+            baseColumnNames="deco_id"
+            baseTableName="item"
+            constraintName="item_deco_fk"
+            referencedColumnNames="id"
+            referencedTableName="decor"/>
+  </changeSet>
+
+</databaseChangeLog>

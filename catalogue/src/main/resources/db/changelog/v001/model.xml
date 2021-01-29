@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="v001/model.xml">
+
+  <!-- define a property that can be used to set varchars to 'char' with oracle -->
+  <property name="varchar_type" value="char" dbms="oracle"/>
+  <property name="varchar_type" value=""/>
+
+  <property name="label" value="DB model creation" />
+
+  <!-- set version -->
+  <changeSet id="model_tag_database_start_version" author="ajan" labels="${label}">
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+   <!-- ###### table model (MODE) ###### -->
+
+  <!-- sequence -->
+  <changeSet id="seq_model_id_create_sequence" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <sequenceExists sequenceName="seq_mode_id"/>
+      </not>
+    </preConditions>
+    <createSequence sequenceName="seq_mode_id" startValue="${seq-start-value}" incrementBy="1"/>
+  </changeSet>
+
+  <changeSet id="seq_model_grant" author="ajan" labels="${label}" dbms="oracle">
+    <preConditions onFail="MARK_RAN">
+        <sequenceExists sequenceName="seq_mode_id"/>
+    </preConditions>
+    <sql>
+      GRANT SELECT ON seq_mode_id TO ${app-user};
+    </sql>
+  </changeSet>
+
+  <!-- table definition/changes -->
+  <changeSet id="model_create_table" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="model"/>
+      </not>
+    </preConditions>
+    <createTable tableName="model" remarks="(MODE) Contains all dimensions in which an item can be produced.">
+      <column name="id" autoIncrement="true" type="BIGINT" remarks="Internal identifier of the model">
+        <constraints primaryKey="true" nullable="false" primaryKeyName="mode_pk"/>
+      </column>
+      <column name="name" type="VARCHAR(30 ${varchar_type})" remarks="Name of the model.">
+        <constraints nullable="false" />
+      </column>
+      <column name="short_name" type="VARCHAR(10 ${varchar_type})" remarks="Short version of model name.">
+        <constraints nullable="false" />
+      </column>
+      <column name="mosi_id" type="BIGINT" remarks="Reference to the related model size.">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <sql>
+      GRANT SELECT, INSERT, UPDATE ON model TO ${app-user};
+    </sql>
+  </changeSet>
+  
+  <!-- foreign keys -->
+  <changeSet id="model_mosi_id" author="ajan" labels="${label}">
+    <addForeignKeyConstraint
+            baseColumnNames="mosi_id"
+            baseTableName="model"
+            constraintName="mode_mosi_fk"
+            referencedColumnNames="id"
+            referencedTableName="model_size"/>
+  </changeSet>
+
+</databaseChangeLog>
