@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    enabled: true # to disable liquibase migration's execitopm pm startup set it to false
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    contexts: none
+    parameters:
+      app-user: sa
+logging:
+  level:
+    liquibase: INFO
+    # set to DEBUG to see SQL statements
+    org.hibernate.SQL: INFO
+    # set to TRACE to see param binding
+    org.hibernate.type: INFO 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="dev/v001/dev-model-size.xml">
+
+  <!-- define a property for the change-set label, ideally a Jira issue number -->
+  <property name="label" value="DB model creation - test data"/>
+
+  <!-- set version -->
+  <changeSet id="model_size_simple_test_data_start_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+  <!-- ###### table model_size (MOSI) ###### -->
+
+  <changeSet id="model_size_insert_simple_test_data" author="ajan" labels="${label}">
+    <!-- 1: 3cm -->
+    <insert tableName="model_size">
+      <column name="id" valueNumeric="1"/>
+      <column name="type" value="cm"/>
+      <column name="value" value="3"/>
+    </insert>
+    <!-- 2: 5cm -->
+    <insert tableName="model_size">
+      <column name="id" valueNumeric="2"/>
+      <column name="type" value="cm"/>
+      <column name="value" value="5"/>
+    </insert>
+    <!-- 3: 10cm -->
+    <insert tableName="model_size">
+      <column name="id" valueNumeric="3"/>
+      <column name="type" value="cm"/>
+      <column name="value" value="10"/>
+    </insert>
+    <!-- 4: 3inch -->
+    <insert tableName="model_size">
+      <column name="id" valueNumeric="4"/>
+      <column name="type" value="inch"/>
+      <column name="value" value="5"/>
+    </insert>
+    <!-- 5: 7inch -->
+    <insert tableName="model_size">
+      <column name="id" valueNumeric="5"/>
+      <column name="type" value="inch"/>
+      <column name="value" value="7"/>
+    </insert>
+  </changeSet>
+
+  <!-- set version -->
+  <changeSet id="model_size_simple_test_data_end_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+</databaseChangeLog>

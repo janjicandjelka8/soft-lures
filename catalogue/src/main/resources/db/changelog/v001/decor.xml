@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="v001/decor.xml">
+
+  <!-- define a property that can be used to set varchars to 'char' with oracle -->
+  <property name="varchar_type" value="char" dbms="oracle"/>
+  <property name="varchar_type" value=""/>
+
+  <property name="label" value="DB model creation" />
+
+  <!-- set version -->
+  <changeSet id="decor_tag_database_start_version" author="ajan" labels="${label}">
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+   <!-- ###### table decor (DECO) ###### -->
+
+  <!-- sequence -->
+  <changeSet id="seq_decor_id_create_sequence" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <sequenceExists sequenceName="seq_deco_id"/>
+      </not>
+    </preConditions>
+    <createSequence sequenceName="seq_deco_id" startValue="${seq-start-value}" incrementBy="1"/>
+  </changeSet>
+
+  <changeSet id="seq_decor_grant" author="ajan" labels="${label}" dbms="oracle">
+    <preConditions onFail="MARK_RAN">
+        <sequenceExists sequenceName="seq_deco_id"/>
+    </preConditions>
+    <sql>
+      GRANT SELECT ON seq_deco_id TO ${app-user};
+    </sql>
+  </changeSet>
+
+  <!-- table definition/changes -->
+  <changeSet id="decor_create_table" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="decor"/>
+      </not>
+    </preConditions>
+    <createTable tableName="decor" remarks="(DECO) Contains all decor in which an item can be produced.">
+      <column name="id" autoIncrement="true" type="BIGINT" remarks="Internal identifier of the decor">
+        <constraints primaryKey="true" nullable="false" primaryKeyName="deco_pk"/>
+      </column>
+      <column name="name" type="VARCHAR(30 ${varchar_type})" remarks="Name of the decor.">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <sql>
+      GRANT SELECT, INSERT, UPDATE ON decor TO ${app-user};
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>

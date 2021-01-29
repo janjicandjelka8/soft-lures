@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="dev/v001/dev-model.xml">
+
+  <!-- define a property for the change-set label, ideally a Jira issue number -->
+  <property name="label" value="DB model creation - test data"/>
+
+  <!-- set version -->
+  <changeSet id="model_simple_test_data_start_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+  <!-- ###### table model_size (MODE) ###### -->
+
+  <changeSet id="model_insert_simple_test_data" author="ajan" labels="${label}">
+    <!-- 1: mighty 3cm -->
+    <insert tableName="model">
+      <column name="id" valueNumeric="1"/>
+      <column name="name" value="mighty"/>
+      <column name="short_name" value="m-3cm"/>
+      <column name="mosi_id" valueNumeric="1"/>
+    </insert>
+    <!-- 2: mighty 5cm -->
+    <insert tableName="model">
+      <column name="id" valueNumeric="2"/>
+      <column name="name" value="mighty"/>
+      <column name="short_name" value="m-5cm"/>
+      <column name="mosi_id" valueNumeric="2"/>
+    </insert>
+    <!-- 3: mighty 10cm -->
+    <insert tableName="model">
+      <column name="id" valueNumeric="3"/>
+      <column name="name" value="mighty"/>
+      <column name="short_name" value="m-10cm"/>
+      <column name="mosi_id" valueNumeric="3"/>
+    </insert>
+    <!-- 4: shed 7inch-->
+    <insert tableName="model">
+      <column name="id" valueNumeric="4"/>
+      <column name="name" value="shed"/>
+      <column name="short_name" value="s-7inch"/>
+      <column name="mosi_id" valueNumeric="4"/>
+    </insert>
+    <!-- 5: shed 10cm-->
+    <insert tableName="model">
+      <column name="id" valueNumeric="5"/>
+      <column name="name" value="shed"/>
+      <column name="short_name" value="s-10cm"/>
+      <column name="mosi_id" valueNumeric="3"/>
+    </insert>
+    <!-- 6: twist 10cm-->
+    <insert tableName="model">
+      <column name="id" valueNumeric="6"/>
+      <column name="name" value="twist"/>
+      <column name="short_name" value="t-10cm"/>
+      <column name="mosi_id" valueNumeric="3"/>
+    </insert>
+  </changeSet>
+
+  <!-- set version -->
+  <changeSet id="model_simple_test_data_end_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+</databaseChangeLog>

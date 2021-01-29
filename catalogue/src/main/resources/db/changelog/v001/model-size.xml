@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="v001/model-size.xml">
+
+  <!-- define a property that can be used to set varchars to 'char' with oracle -->
+  <property name="varchar_type" value="char" dbms="oracle"/>
+  <property name="varchar_type" value=""/>
+
+  <property name="label" value="DB model creation" />
+
+  <!-- set version -->
+  <changeSet id="model_size_tag_database_start_version" author="ajan" labels="${label}">
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+   <!-- ###### table model_size (MOSI) ###### -->
+
+  <!-- sequence -->
+  <changeSet id="seq_model_size_id_create_sequence" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <sequenceExists sequenceName="seq_mosi_id"/>
+      </not>
+    </preConditions>
+    <createSequence sequenceName="seq_mosi_id" startValue="${seq-start-value}" incrementBy="1"/>
+  </changeSet>
+
+  <changeSet id="seq_model_size_grant" author="ajan" labels="${label}" dbms="oracle">
+    <preConditions onFail="MARK_RAN">
+        <sequenceExists sequenceName="seq_mosi_id"/>
+    </preConditions>
+    <sql>
+      GRANT SELECT ON seq_mosi_id TO ${app-user};
+    </sql>
+  </changeSet>
+
+  <!-- table definition/changes -->
+  <changeSet id="model_size_create_table" author="ajan" labels="${label}">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="model_size"/>
+      </not>
+    </preConditions>
+    <createTable tableName="model_size" remarks="(MOSI) Contains all dimensions in which an item can be produced.">
+      <column name="id" autoIncrement="true" type="BIGINT" remarks="Internal identifier of the model size">
+        <constraints primaryKey="true" nullable="false" primaryKeyName="mosi_pk"/>
+      </column>
+      <column name="type" type="VARCHAR(30 ${varchar_type})" remarks="Type of size in which an item can be produced(cm, inch).">
+        <constraints nullable="false" />
+      </column>
+      <column name="value" type="INT" remarks="Size value.">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <sql>
+      GRANT SELECT, INSERT, UPDATE ON model_size TO ${app-user};
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>

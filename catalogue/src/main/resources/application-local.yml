@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  liquibase:
+    contexts: dev
+    parameters:
+      app-user: sa
+  zipkin:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+logging:
+  level:
+    liquibase: DEBUG
+    # set to DEBUG to see SQL statements
+    org.hibernate.SQL: DEBUG
+    # set to TRACE to see param binding
+    org.hibernate.type: TRACE 

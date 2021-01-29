@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="dev/v001/dev-decor.xml">
+
+  <!-- define a property for the change-set label, ideally a Jira issue number -->
+  <property name="label" value="DB model creation - test data"/>
+
+  <!-- set version -->
+  <changeSet id="decor_simple_test_data_start_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+  <!-- ###### table decor (DECO) ###### -->
+
+  <changeSet id="decor_insert_simple_test_data" author="ajan" labels="${label}">
+    <!-- 1: -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="1"/>
+      <column name="name" value="decor 1"/>
+    </insert>
+    <!-- 2: -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="2"/>
+      <column name="name" value="decor 2"/>
+    </insert>
+    <!-- 3:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="3"/>
+      <column name="name" value="decor 3"/>
+    </insert>
+    <!-- 4:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="4"/>
+      <column name="name" value="decor 4"/>
+    </insert>
+    <!-- 5:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="5"/>
+      <column name="name" value="decor 5"/>
+    </insert>
+    <!-- 6:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="6"/>
+      <column name="name" value="decor 6"/>
+    </insert>
+    <!-- 7:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="7"/>
+      <column name="name" value="decor 7"/>
+    </insert>
+    <!-- 8:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="8"/>
+      <column name="name" value="decor 8"/>
+    </insert>
+    <!-- 9:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="9"/>
+      <column name="name" value="decor 9"/>
+    </insert>
+  </changeSet>
+
+  <!-- set version -->
+  <changeSet id="model_simple_test_data_end_version" author="ajan" labels="${label}" >
+    <tagDatabase tag="version_0.0.1" />
+  </changeSet>
+
+</databaseChangeLog>

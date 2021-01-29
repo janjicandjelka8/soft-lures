@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd"
+  logicalFilePath="dev/db.changelog.dev.data.xml">
+
+  <property name="now" value="sysdate" dbms="oracle"/>
+  <property name="now" value="NOW()" dbms="h2" />
+
+  <!-- define a property that can be used to set varchars to 'char' with oracle -->
+  <property name="varchar_type" value="char" dbms="h2"/>
+
+  <include  file="v001/dev-model-size.xml" relativeToChangelogFile="true" />
+  <include  file="v001/dev-model.xml" relativeToChangelogFile="true" />
+  <include  file="v001/dev-decor.xml" relativeToChangelogFile="true" />
+  <include  file="v001/dev-item.xml" relativeToChangelogFile="true" />
+</databaseChangeLog>
