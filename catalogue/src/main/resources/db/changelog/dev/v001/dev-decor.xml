@@ -62,6 +62,11 @@
       <column name="id" valueNumeric="9"/>
       <column name="name" value="decor 9"/>
     </insert>
+	<!-- 10:  -->
+    <insert tableName="decor">
+      <column name="id" valueNumeric="10"/>
+      <column name="name" value="decor 10"/>
+    </insert>
   </changeSet>
 
   <!-- set version -->
